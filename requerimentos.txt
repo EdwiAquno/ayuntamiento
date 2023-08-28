@@ -1,0 +1,8 @@
+·	Matplotlip
+·	Fpdf
+·	Pandas
+·	Numpy
+·	pdfkit
+·	mysql-connector-python
+·	XlsxWriter
+

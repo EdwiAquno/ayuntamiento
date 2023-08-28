@@ -1,0 +1,23 @@
+<script>
+    // Configurar el tiempo de inactividad permitido en milisegundos (por ejemplo, 30 minutos)
+    var maxInactiveDuration = 1 * 60 * 1000;
+
+    // Función para redirigir al usuario a la página de cierre de sesión
+    function logout() {
+        window.location.href = '/logout';  // Reemplaza '/logout' con la URL de tu vista de cierre de sesión
+    }
+
+    // Función para reiniciar el temporizador de inactividad
+    function resetInactiveTimer() {
+        clearTimeout(inactiveTimer);
+        inactiveTimer = setTimeout(logout, maxInactiveDuration);
+    }
+
+    // Reiniciar el temporizador de inactividad en eventos de interacción del usuario
+    document.addEventListener('mousemove', resetInactiveTimer);
+    document.addEventListener('keydown', resetInactiveTimer);
+    document.addEventListener('scroll', resetInactiveTimer);
+
+    // Iniciar el temporizador de inactividad al cargar la página
+    var inactiveTimer = setTimeout(logout, maxInactiveDuration);
+</script>

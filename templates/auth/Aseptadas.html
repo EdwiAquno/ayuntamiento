@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+
+
+    <!-- Topbar Search -->
+    <form method="POST"  action="{{ url_for('auth.buscar_Aseptadas') }}"
+    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+    <div class="input-group">
+        <input type="text" name="search_term" class="form-control bg-light border-0 small" placeholder="Search for..."
+            aria-label="Search" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">
+                <i class="fas fa-search fa-sm"></i>
+            </button>
+        </div>
+    </div>
+   </form>
+   
+
+<h1>Peticiones</h1>
+
+    
+<div class="card shadow mb-4">
+
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Área Solicitante</th>
+                <th>Descripción</th>
+                <th>Usuario Solicitante</th>
+                <th>Material</th>
+                <th>Cantidad de Material</th>
+                <th>Estado de Aprobación</th>
+                <th>Responsable de Aprobación</th>
+                <th>Fecha de Aprobación</th>
+            </tr>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario.ID }}</td>
+                <td>{{ usuario.fecha_solicitud }}</td>
+                <td>{{ usuario.area_solicitante }}</td>
+                <td>{{ usuario.descripcion }}</td>
+                <td>{{ usuario.usuario_solicitante }}</td>
+                <td>{{ usuario.material }}</td>
+                <td>{{ usuario.cantidad_material }}</td>
+                <td>{{ usuario.estado_aprobacion }}</td>
+                <td>{{ usuario.responsable_aprobacion}}</td>
+                <td>{{ usuario.fecha_aprobacion}}</td>
+                <td> 
+                    <form method="POST" action="{{ url_for('auth.surtir_aceptacion', solicitud_id=usuario.ID) }}">
+                        <!-- Resto del formulario -->
+                        <button type="submit" class="btn btn-primary">Surtir</button>
+                    </form>
+                    
+                        <!-- Resto del formulario -->
+                      
+                       
+                      
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+</div>
+</div>
+
+ 
+{% endblock %}

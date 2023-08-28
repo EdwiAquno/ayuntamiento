@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+
+
+    <!-- Topbar Search -->
+
+
+
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Solicitudes</h1>
+    
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    
+               
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Fecha de Solicitud</th>
+                            <th>Área Solicitante</th>
+                            <th>Descripción</th>
+                            <th>Usuario Solicitante</th>
+                            <th>Material</th>
+                            <th>Número de Requisición</th>
+                            <th>Unidad de Medida</th>
+                            <th>Cantidad</th>
+                            <th>Número de Petición</th>
+                            <th>Concepto</th>
+                            <th>Responsable de Aprobación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for solicitud in solicitudes %}
+                        <tr>
+                            <td>{{ solicitud.ID }}</td>
+                            <td>{{ solicitud.fecha_solicitud }}</td>
+                            <td>{{ solicitud.area_solicitante }}</td>
+                            <td>{{ solicitud.descripcion }}</td>
+                            <td>{{ solicitud.usuario_solicitante }}</td>
+                            <td>{{ solicitud.material_nombre }}</td>
+                            <td>{{ solicitud.numero_requisicion }}</td>
+                            <td>{{ solicitud.unidad_de_medida }}</td>
+                            <td>{{ solicitud.cantidad }}</td>
+                            <td>{{ solicitud.numero_peticion }}</td>
+                            <td>{{ solicitud.concepto }}</td>
+                            <td>{{ solicitud.responsable_aprobacion }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+
+
+<!-- End of Main Content -->
+
+
+</div>
+
+
+ 
+{% endblock %}

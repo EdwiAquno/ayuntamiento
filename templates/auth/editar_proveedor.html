@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Editar Proveedor</h1>
+  <form method="POST" action="{{ url_for('auth.editar_proveedor', proveedor_id=proveedor.ID) }}">
+    {{ form.csrf_token }}
+    <div class="form-group">
+      {{ form.nombre.label }}
+      {{ form.nombre(class='form-control') }}
+      {% if form.nombre.errors %}
+        <ul class="errors">
+          {% for error in form.nombre.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      {{ form.direccion.label }}
+      {{ form.direccion(class='form-control') }}
+      {% if form.direccion.errors %}
+        <ul class="errors">
+          {% for error in form.direccion.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      {{ form.ciudad.label }}
+      {{ form.ciudad(class='form-control') }}
+      {% if form.ciudad.errors %}
+        <ul class="errors">
+          {% for error in form.ciudad.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      {{ form.telefono.label }}
+      {{ form.telefono(class='form-control') }}
+      {% if form.telefono.errors %}
+        <ul class="errors">
+          {% for error in form.telefono.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      {{ form.correo_electronico.label }}
+      {{ form.correo_electronico(class='form-control') }}
+      {% if form.correo_electronico.errors %}
+        <ul class="errors">
+          {% for error in form.correo_electronico.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </form>
+{% endblock %}

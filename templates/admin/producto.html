@@ -1,0 +1,57 @@
+
+
+
+
+{% extends 'base.html' %}
+
+
+{% block header_img %}{% endblock %}
+{% block header_title %}{% endblock %}
+{% block header_sub %} {% endblock %}
+
+
+
+{% block content %} 
+<div class="container">
+    <div class="col-lg-8 col-md-10 mx-auto">
+<form class="user" method="POST" action="{{ url_for('auth.producto') }}">
+    {{ form.csrf_token }}
+    <div class="form-group">
+        <input type="text" class="form-control form-control-user" id="nombre" name="nombre" placeholder="Nombre" required>
+    </div>
+
+    <div class="form-group">
+        <input type="text" class="form-control form-control-user" id="lote" name="lote" placeholder="Lote" required>
+    </div>
+
+    <div class="form-group">
+        <input type="text" class="form-control form-control-user" id="descripcion" name="descripcion" placeholder="Descripción">
+    </div>
+    
+    <div class="form-group">
+        <input type="number" class="form-control form-control-user" id="cantidad_disponible" name="cantidad_disponible" placeholder="Cantidad Disponible">
+    </div>
+    
+
+    <div class="form-group">
+        {{ form.area.label }}
+        {{ form.area(class="form-control") }}
+        {% if form.area.errors %}
+            {% for error in form.area.errors %}
+            <p class="text-danger">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div  class="form-group">
+        {{ form.fecha.label }} {{ form.fecha }}
+            {% if form.fecha.errors %}
+                <span style="color: red;">{{ form.fecha.errors[0] }}</span>
+            {% endif %}
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-user btn-block">Guardar</button>
+</form>
+</div>
+</div>
+{% endblock %}  

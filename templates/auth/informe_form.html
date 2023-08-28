@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generar PDF desde Vista</title>
+</head>
+<body>
+    <h1>Generar PDF desde Vista</h1>
+
+    <form class="user"  action="{{ url_for('auth.generar_informe_pdf_route') }}" method="post" enctype="multipart/form-data">
+        <label for="fecha_aprobacion">Fecha de Aprobación:</label>
+  <input type="date" id="fecha_aprobacion" name="fecha_aprobacion">
+
+  <label for="area_solicitante">Área Solicitante:</label>
+  <select id="area_solicitante" name="area_solicitante">
+    <option value="area1">Sistemas</option>
+    <option value="area2">Área 2</option>
+    <!-- Agrega opciones adicionales según tus áreas -->
+  </select>
+
+  <button type="submit">Generar Informe PDF</button>
+    </form>
+
+</body>
+</html>

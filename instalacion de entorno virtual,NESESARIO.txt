@@ -1,0 +1,18 @@
+A continuación, se describen los pasos para crear y configurar un entorno virtual utilizando venv:
+1.	Abrir una terminal o línea de comandos en el directorio deseado para el proyecto.
+2.	Ejecutar el siguiente comando para crear un nuevo entorno virtual:
+    python3 -m venv nombre_entorno
+Donde "nombre_entorno" es el nombre que se le dará al entorno virtual. Puede elegir cualquier nombre descriptivo según las necesidades del proyecto.
+3.	Activar el entorno virtual ejecutando el siguiente comando:
+·	En Windows:
+            nombre_entorno\Scripts\activate.bat
+·	En macOS o Linux:
+source nombre_entorno/bin/activate
+Al activar el entorno virtual, el prompt de la terminal cambiará para indicar que se está trabajando dentro del entorno virtual.
+
+4.	Una vez activado el entorno virtual, se pueden instalar las herramientas de
+desarrollo de Python y otros complementos necesarios para el proyecto. Esto se puede hacer utilizando el administrador de paquetes pip.
+            para instalar Flask, se puede ejecutar el siguiente comando:
+               pip install flask
+Esta instalación se realizará dentro del entorno virtual, lo que significa que no afectará a las instalaciones de Python en el sistema operativo.
+

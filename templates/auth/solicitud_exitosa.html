@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h2>Solicitud Exitosa</h2>
+      <form id="solicitudForm" method="post" action="{{ url_for('auth.crear_solicitud') }}" class="form-horizontal">
+        {{ form.hidden_tag() }}
+        {{ form.csrf_token }}
+        <div class="form-group">
+          {{ form.descripcion.label(class="control-label col-md-2") }}
+          <div class="col-md-10">
+            {{ form.descripcion(class="form-control", rows=4, value=descripcion) }}
+          </div>
+        </div>
+        <div class="form-group">
+          {{ form.numero.label(class="control-label col-md-2") }}
+          <div class="col-md-10">
+            {{ form.numero(class="form-control", value=numero_peticion) }}
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Agregar otro producto</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+
+  <div class="alert alert-danger" role="alert">
+    <ul class="messages">
+      <p>Por favor, revisa los errores e intenta de nuevo.</p>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+
+  </div>
+  {% endif %}
+{% endwith %}
+
+
+
+{% endblock %}

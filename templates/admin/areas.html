@@ -1,0 +1,62 @@
+
+
+{% extends 'base.html' %}
+
+
+{% block header_img %}{% endblock %}
+{% block header_title %}{% endblock %}
+{% block header_sub %} {% endblock %}
+
+
+
+{% block content %} 
+
+
+
+
+
+
+<div class="container">
+    <div class="col-lg-8 col-md-10 mx-auto">
+        <form class="user" method="POST" action="{{ url_for('auth.areas') }}">
+            {{ form.csrf_token }}
+            <div class="form-group">
+                {{ form.nombre.label(class="form-label") }}
+                {{ form.nombre(class="form-control form-control-user", placeholder="Nombre", required="required") }}
+            </div>
+            <div class="form-group">
+                {{ form.descripcion.label(class="form-label") }}
+                {{ form.descripcion(class="form-control form-control-user", placeholder="Descripción") }}
+            </div>
+
+            <div class="form-group">
+                {{ form.password.label }}
+                {{ form.password(class="form-control") }}
+                {% if form.password.errors %}
+                    {% for error in form.password.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.confirm_password.label }}
+                {{ form.confirm_password(class="form-control") }}
+            </div>
+
+            <div class="form-group">
+                {{ form.email.label(class="form-control-label") }}
+                {{ form.email(class="form-control form-control-user", placeholder="Correo Electrónico") }}
+                {% for error in form.email.errors %}
+                    <span class="text-danger">{{ error }}</span>
+                {% endfor %}
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-user btn-block">Guardar</button>
+        </form>
+    </div>
+</div>
+
+
+
+  
+  {% endblock %} 

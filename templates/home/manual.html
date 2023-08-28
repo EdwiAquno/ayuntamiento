@@ -1,0 +1,106 @@
+
+
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock%}
+
+{% block header_img %}{% endblock %}
+{% block header_title %}{% endblock %}
+{% block header_sub %} {% endblock %}
+
+
+
+{% block content %} 
+
+<div class="container mt-4">
+    <h1>Manual de Usuario</h1>
+    
+    <div class="row">
+      <div class="col-md-3">
+        <div class="list-group">
+          <a href="#seccion1" class="list-group-item list-group-item-action">Admin</a>
+          <a href="#seccion2" class="list-group-item list-group-item-action">Sección 2</a>
+          <a href="#seccion3" class="list-group-item list-group-item-action">Sección 3</a>
+          <!-- Agregar más enlaces de secciones aquí -->
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <div class="col-md-9">
+        <div id="seccion1">
+          <h2>Sección 1: Admin</h2>
+          <p>Administrador: El panel de administrador es el que se encarga de la gestion de usuarios y areas administrativas </p>
+          <div class="col-md-9">
+          <img src="/static/img/Screenshot_20230822_224234.png" alt="Imagen Responsive" class="img-fluid">
+        </div>
+
+        <p>El usurio administrador es el encargado de agregar usuarios editarlos y eliminarlos
+        </p>
+        <div class="col-md-9">
+        <img src="/static/img/Screenshot_20230822_224640.png" alt="Imagen Responsive" class="img-fluid">
+      </div>
+
+      <p>El correo electrónico de usuario es a donde se enviarán las credenciales de inicio de sesión del usuario agregado. El tipo de usuario corresponde al rol del usuario agregado dentro del sistema, donde "área" corresponde al usuario de cada área, quien hará las requisiciones. "Dirección" corresponde al usuario encargado de aceptar dichas requisiciones, y finalmente, el usuario administrador es el encargado de la administración general. 
+
+    </p>
+    <div class="col-md-9">
+    <img src="/static/img/Screenshot_20230822_225736.png" alt="Imagen Responsive" class="img-fluid">
+  </div>
+
+  <p>El formulario para agregar un área administrativa solicita contraseña y correo. El correo corresponde al correo del área administrativa desde el cual se enviarán las requisiciones en formato PDF, solicitadas por el usuario. La contraseña se refiere a la clave de aplicación que otorga Gmai
+  </p>
+  <div class="col-md-9">
+  
+</div>
+
+  
+        </div>
+        <br>
+        <br>
+        <br>
+
+        
+        <div id="seccion2">
+          <h2>Sección 2: Usuario de Area</h2>
+          <p>El formulario para crear una petición es bastante simple, solo se deben completar los campos requeridos. El botón azul es el que genera el formato PDF y lo envía automáticamente por correo. El botón gris es el que guarda la información del material pedido en nuestra base de datos. Si ya se ha agregado un material y deseas solicitar más dentro del mismo formato, asegúrate de presionar el botón gris después de solicitar un material adicional. Al final, presiona el botón azul para que se genere tu petición.
+            El usuario podrá verificar las peticiones que ha realizado dentro de cada formato utilizando el número de petición y la fecha correspondiente.
+          </p>
+          <div class="col-md-9">
+          <img src="/static/img/Screenshot_20230822_231431.png" alt="Imagen Responsive" class="img-fluid">
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div id="seccion3">
+          <h2>Sección 3: Usuario tipo dirección</h2>
+          <p>El usuario puede experimentar problemas al iniciar sesión si no cuenta con una conexión a internet fluida. Este usuario recibirá las notificaciones por correo electrónico con las solicitudes al iniciar sesión, lo que podría ocasionar un ligero retraso en el proceso de inicio de sesión de unos segundos.
+          </p>
+          <div class="col-md-9">
+          <img src="/static/img/Screenshot_20230822_234704.png" alt="Imagen Responsive" class="img-fluid">
+          </div>
+
+          <p>El inicio muestra el porcentaje de materiales en una gráfica, así como las notificaciones de las peticiones realizadas en los últimos días.
+            Los formularios para agregar materiales y proveedores son bastante sencillos, pero es necesario mencionar que primero se debe agregar el proveedor y posteriormente el material. Los proveedores se presentan en el formulario como una lista desplegable; simplemente selecciona el que desees.
+          </p>
+        <div class="col-md-9">
+        <img src="/static/img/Screenshot_20230823_002159.png" alt="Imagen Responsive" class="img-fluid">
+        </div>
+        <p>El formulario de la requisición solicita información sobre la petición que se está aceptando. Además, cuenta con ventanas auxiliares que permiten verificar las peticiones realizadas y los materiales disponibles. En el formulario, los materiales se presentan en una lista desplegable. Asegúrate de tener suficientes materiales en inventario al asignar cantidades. Si no hay suficiente cantidad disponible, el sistema te notificará y tendrás que intentarlo nuevamente.
+        </p>
+        <p>El botón gris es el que registrará los datos de la petición aceptada. Para aceptar otra petición, solo necesitas asegurarte de haber presionado dicho botón. Si la nueva petición está dentro del mismo formato, simplemente cambia la información del material. Al finalizar la aceptación de todas las peticiones en el mismo formato, presiona el botón azul. Automáticamente se generará y descargará el PDF.</p>
+        </div>
+        <!-- Agregar más secciones aquí -->
+      </div>
+    </div>
+  </div>
+  
+  <!-- Scripts de Bootstrap y jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+
+
+{% endblock %}    

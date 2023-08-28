@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Perfil de Usuario</h5>
+            {% for usuario in usuarios %}
+            <div class="profile-section">
+                <div class="profile-item">
+                    <label>ID:</label>
+                    <p>{{ usuario.ID }}</p>
+                </div>
+                <div class="profile-item">
+                    <label>Usuario:</label>
+                    <p>{{ usuario.username }}</p>
+                </div>
+                <div class="profile-item">
+                    <label>Nombre:</label>
+                    <p>{{ usuario.nombre }}</p>
+                </div>
+                <div class="profile-item">
+                    <label>Apellido Paterno:</label>
+                    <p>{{ usuario.apellido_paterno }}</p>
+                </div>
+                <div class="profile-item">
+                    <label>Apellido Materno:</label>
+                    <p>{{ usuario.apellido_materno }}</p>
+                </div>
+                <div class="profile-item">
+                    <label>Tipo:</label>
+                    <p>{{ usuario.tipo }}</p>
+                </div>
+                <div class="profile-item">
+                    <label>Área:</label>
+                    <p>{{ usuario.area }}</p>
+                </div>
+                <div class="profile-actions">
+                    
+                    <form method="POST" action="{{ url_for('home.update', user_id=usuario.ID) }}">
+                        <button type="submit" class="btn btn-primary">Editar</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+
+
+
+</div>
+
+
+{% endblock %}

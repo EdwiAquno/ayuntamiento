@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+  <!-- Topbar Search -->
+
+  
+
+
+
+
+  <h1>Peticiones</h1>
+  <div class="card-body">
+    <div class="table-responsive">
+  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <thead>
+    <tr>
+        <th>Número de Petición</th>
+        <th>Descripción</th>
+        <th>Usuario Solicitante</th>
+        <th>Área Solicitante</th>
+        <th>Fecha de Solicitud</th>
+        <th>Material</th>
+        <th>Unidad de Medida</th>
+        <th>Cantidad</th>
+    </tr>
+</thead>
+<tbody>
+    {% for peticion_agrupada in peticiones %}
+        {% for peticion in peticion_agrupada['detalles'] %}
+            <tr>
+                {% if loop.index == 1 %}
+                    <td rowspan="{{ peticion_agrupada['detalles']|length }}">{{ peticion.numero_requisicion }}</td>
+                    <td rowspan="{{ peticion_agrupada['detalles']|length }}">{{ peticion.descripcion }}</td>
+                    <td rowspan="{{ peticion_agrupada['detalles']|length }}">{{ peticion_agrupada['usuario_nombre_completo'] }}</td>
+                {% endif %}
+                <td>{{ obtener_nombre_area(peticion.area_solicitante) }}</td>
+                <td>{{ peticion.fecha_solicitud }}</td>
+                <td>{{ peticion.material }}</td>
+                <td>{{ peticion.unidad_de_medida }}</td>
+                <td>{{ peticion.cantidad }}</td>
+            </tr>
+        {% endfor %}
+    {% endfor %}
+</tbody>
+</table>
+
+</div>
+</div>
+
+</div>
+
+ 
+{% endblock %}

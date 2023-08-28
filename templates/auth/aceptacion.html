@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12  col-md-offset-4">
+        <div class="container overflow-hidden text-center">
+            <div class="row gx-8">
+              <div class="col-md-4 col-md-offset-4">
+               <div class="p-3"><h2>Crear Solicitud</h2>
+                <form method="post">
+                  {{ form.csrf_token }}
+                  <div class="form-group">
+                    {{ form.fecha_solicitud.label }} {{ form.fecha_solicitud(class="form-control") }}
+                  </div>
+                  <div class="form-group">
+                    {{ form.area_solicitante.label }} {{ form.area_solicitante(class="form-control") }}
+                  </div>
+                  <div class="form-group">
+                    {{ form.descripcion.label }} {{ form.descripcion(class="form-control") }}
+                  </div>
+                  <div class="form-group">
+                    {{ form.usuario_solicitante.label }} {{ form.usuario_solicitante(class="form-control") }}
+                  </div>
+                  <div class="form-group">
+                    {{ form.material.label(class="form-control-label") }}
+                    {{ form.material(class="form-control") }}
+                </div>
+                
+                  <div class="form-group">
+                    {{ form.numero_requisicion.label }} {{ form.numero_requisicion(class="form-control") }}
+                  </div>
+                  <div class="form-group">
+                    {{ form.unidad_de_medida.label }} {{ form.unidad_de_medida(class="form-control") }}
+                  </div>
+                  <div class="form-group">
+                    {{ form.cantidad.label }} {{ form.cantidad(class="form-control", min="1") }}
+                    {% if form.cantidad.errors %}
+                      <ul class="errors">
+                        {% for error in form.cantidad.errors %}
+                          <li>{{ error }}</li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+                  </div>
+                  <div class="form-group">
+                    {{ form.numero_peticion.label }} {{ form.numero_peticion(class="form-control") }}
+                  </div>
+                  <div class="form-group">
+                    {{ form.concepto.label }} {{ form.concepto(class="form-control") }}
+                  </div>
+                  <div class="form-group">
+                    {{ form.responsable_aprobacion.label }} {{ form.responsable_aprobacion(class="form-control") }}
+                  </div>
+                  {{ form.submit(class="btn btn-primary") }}  <!-- Botón para redireccionar -->
+          <button type="submit" name="save_to_db" class="btn btn-secondary">Guardar en BDD</button>  <!-- Botón para guardar en la base de datos sin redireccionar -->
+    
+                </form></div>
+              </div>
+              <div class="col-md-7 col-md-offset-5">
+                <div class="p-3"><form method="POST" action="{{ url_for('auth.aceptacion') }}" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                  <div class="input-group">
+                    <input type="text" name="usuario_solicitante" class="form-control bg-light border-0 small" placeholder="Usuario Solicitante" aria-label="Search" aria-describedby="basic-addon2">
+                    <input type="text" name="numero_solicitud" class="form-control bg-light border-0 small" placeholder="Número de Solicitud" aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search fa-sm"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+                <div  class="table-container" style="max-height: 400px; overflow-y: auto;">
+                <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                        <th>Número de Petición</th>
+                        <th>Descripción</th>
+                        <th>Usuario Solicitante</th>
+                        <th>Área Solicitante</th>
+                        <th>Fecha de Solicitud</th>
+                        <th>Material</th>
+                        <th>Unidad de Medida</th>
+                        <th>Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for peticion_agrupada in peticiones %}
+                        {% for peticion in peticion_agrupada['detalles'] %}
+                            <tr>
+                                {% if loop.index == 1 %}
+                                    <td rowspan="{{ peticion_agrupada['detalles']|length }}">{{ peticion.numero_requisicion }}</td>
+                                    <td rowspan="{{ peticion_agrupada['detalles']|length }}">{{ peticion.descripcion }}</td>
+                                    <td rowspan="{{ peticion_agrupada['detalles']|length }}">{{ peticion_agrupada['usuario_nombre_completo'] }}</td>
+                                {% endif %}
+                                <td>{{ peticion.area_solicitante }}</td>
+                                <td>{{ peticion.fecha_solicitud }}</td>
+                                <td>{{ peticion.material }}</td>
+                                <td>{{ peticion.unidad_de_medida }}</td>
+                                <td>{{ peticion.cantidad }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
+                </tbody>
+                </table>
+
+                
+              </div>
+              <form method="POST" action="{{ url_for('auth.aceptacion') }}"
+    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+    <div class="input-group">
+        <input type="text" name="search_term" class="form-control bg-light border-0 small" placeholder="Search for..."
+            aria-label="Search" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">
+                <i class="fas fa-search fa-sm"></i>
+            </button>
+        </div>
+    </div>
+</form>
+              <div  class="table-container" style="max-height: 400px; overflow-y: auto;">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Lote</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        
+                       
+                        <th>Cantidad Disponible</th>
+                        <th>Fecha de registro</th>
+                        
+                        <th>Provedor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for material in materiales %}
+                    <tr>
+                        <td>{{ material.ID }}</td>
+                        <td>{{ material.lote  }}</td>
+                       
+                        
+                        <td>{{ material.nombre }}</td>
+                        <td>{{ material.descripcion }}</td>
+                        <td>{{ material.cantidad}}</td>
+                        <td>{{ material.fecha}}</td>
+                        <td>{{ material.proveedor }}</td>
+                        
+                       
+
+                        
+                        
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+          </div>
+              </div>
+              </div>
+            </div>
+          </div>
+      
+    </div>
+  </div>
+</div>
+{% endblock %}

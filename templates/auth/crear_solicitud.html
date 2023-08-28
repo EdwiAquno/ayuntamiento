@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h2>Crear Solicitud</h2>
+      <form id="solicitudForm" method="post" action="{{ url_for('auth.crear_solicitud') }}" class="form-horizontal">
+        {{ form.hidden_tag() }}
+        {{ form.csrf_token }}
+        <div class="form-group">
+          {{ form.descripcion.label(class="control-label col-md-2") }}
+          <div class="col-md-10">
+            {{ form.descripcion(class="form-control", rows=4) }}
+          </div>
+          <!-- ... código existente ... -->
+
+<div class="form-group">
+  {{ form.usuario_nombre_completo.label(class="control-label col-md-2") }}
+  <div class="col-md-10">
+      {{ form.usuario_nombre_completo(class="form-control") }}
+  </div>
+</div>
+
+<!-- ... resto del formulario ... -->
+
+        </div>
+        <div class="form-group">
+          {{ form.numero.label(class="control-label col-md-2") }}
+          <div class="col-md-10">
+            {{ form.numero(class="form-control") }}
+          </div>
+        </div>
+        <div class="form-group">
+          {{ form.cantidad.label(class="control-label col-md-2") }}
+          <div class="col-md-10">
+            {{ form.cantidad(class="form-control", min="1") }}
+            {% if form.cantidad.errors %}
+              <ul class="errors">
+                {% for error in form.cantidad.errors %}
+                  <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+        </div>
+        <div class="form-group">
+          {{ form.unidad.label(class="control-label col-md-2") }}
+          <div class="col-md-10">
+            {{ form.unidad(class="form-control") }}
+          </div>
+        </div>
+        <div class="form-group">
+          {{ form.medida.label(class="control-label col-md-2") }}
+          <div class="col-md-10">
+            {{ form.medida(class="form-control") }}
+          </div>
+        </div>
+       
+     
+          <!-- Resto de los campos del formulario -->
+          {{ form.submit(class="btn btn-primary") }}  <!-- Botón para redireccionar -->
+          <button type="submit" name="save_to_db" class="btn btn-secondary">Guardar en BDD</button>  <!-- Botón para guardar en la base de datos sin redireccionar -->
+    
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

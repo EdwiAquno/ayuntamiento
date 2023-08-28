@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+<!-- Resto del código del template HTML -->
+
+{% block content %}
+<head>
+    <title>Bandeja de entrada</title>
+    <!-- Agrega los enlaces a los archivos de PDF.js -->
+    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+</head>
+<body>
+    <h1>Mensajes en la bandeja de entrada</h1>
+    {% for mensaje in mensajes %}
+    <div>
+        {% if "application/pdf" in mensaje.content_type %}
+            <h3>{{ mensaje.subject }}</h3>
+            <a href="#" onclick="verPDF('{{ mensaje.id }}'); return false;">Ver PDF</a>
+            <div id="pdfTextContainer{{ mensaje.id }}"></div>
+        {% else %}
+            <h3>{{ mensaje.subject }}</h3>
+            <p>De: {{ mensaje.from }}</p>
+            <p>Para: {{ mensaje.to }}</p>
+            <p>Fecha: {{ mensaje.date }}</p>
+            <p>{{ mensaje.body }}</p>
+            {% if "url_adjunto" in mensaje %}
+                <p>Adjunto: <a href="{{ mensaje.url_adjunto }}" target="_blank">Ver Adjunto</a></p>
+            {% endif %}
+        {% endif %}
+    </div>
+    {% endfor %}
+    <div id="pdfContainer"></div>
+
+    <script>
+        function verPDF(mensajeId) {
+            const pdfContainer = document.getElementById("pdfContainer");
+            const pdfTextContainer = document.getElementById("pdfTextContainer" + mensajeId);
+            pdfContainer.innerHTML = ""; // Limpiar el contenedor
+
+            PDFJS.getDocument(`/obtener_pdf?id=${mensajeId}`)
+                .promise.then(function (pdf) {
+                    pdf.getPage(1).then(function (page) {
+                        const viewport = page.getViewport({ scale: 1.5 });
+                        const canvas = document.createElement("canvas");
+                        canvas.style.display = "block";
+                        canvas.width = viewport.width;
+                        canvas.height = viewport.height;
+                        pdfContainer.appendChild(canvas);
+
+                        const context = canvas.getContext("2d");
+                        const renderContext = {
+                            canvasContext: context,
+                            viewport: viewport,
+                        };
+                        page.render(renderContext);
+
+                        // Obtener el texto del PDF y mostrarlo en el contenedor de texto
+                        page.getTextContent().then(function (textContent) {
+                            const textLayer = document.createElement("div");
+                            textLayer.style.position = "absolute";
+                            textLayer.style.top = "0";
+                            textLayer.style.left = "0";
+                            textLayer.style.width = `${viewport.width}px`;
+                            textLayer.style.height = `${viewport.height}px`;
+                            textLayer.style.pointerEvents = "none";
+                            pdfTextContainer.appendChild(textLayer);
+
+                            const textContentStream = PDFJS.renderTextLayer({
+                                textContent: textContent,
+                                container: textLayer,
+                                viewport: viewport,
+                                textDivs: [],
+                                textContentItemsStr: [],
+                                textContentStream: textContent.streamText,
+                            });
+                        });
+                    });
+                });
+        }
+    </script>
+    
+{% endblock %}
+

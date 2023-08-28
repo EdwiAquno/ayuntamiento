@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Provedores</h1>
+    <a href="{{ url_for('auth.mostrar_Provedores') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+        class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Ver Provedores</a>
+</div>
+<div class="container-fluid">
+
+<div class="container">
+<div class="p-5">
+    <h1>Provedores</h1>
+    <form  class="user"  method="POST" action="{{ url_for('auth.llenar_tabla') }}" class="container">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.nombre.label(class="form-control-label") }}
+            {{ form.nombre(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.direccion.label(class="form-control-label") }}
+            {{ form.direccion(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.ciudad.label(class="form-control-label") }}
+            {{ form.ciudad(class="form-control") }}
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+            {{ form.telefono.label(class="form-control-label") }}
+            {{ form.telefono(class="form-control") }}
+         </div>
+        </div>
+        <div class="form-group">
+            {{ form.correo_electronico.label(class="form-control-label") }}
+            {{ form.correo_electronico(class="form-control") }}
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</div>
+{% endblock %}

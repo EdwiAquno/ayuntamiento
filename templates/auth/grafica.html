@@ -1,0 +1,78 @@
+<!-- auth/inventario_grafica.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+ <!-- auth/inventario_grafica.html -->
+
+ <h1 class="mb-4">Inventario</h1>
+
+ <div class="container">
+     <div class="row">
+         <div class="col-md-6">
+             <div class="card mb-4">
+                 <div class="card-body">
+                     <h5 class="card-title">Gráfica de pastel</h5>
+                     <img src="data:image/png;base64,{{ image_base64 }}" alt="Gráfica de pastel" class="img-fluid">
+                 </div>
+             </div>
+         </div>
+     </div>
+     <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Lote</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Unidad de Medida</th>
+                        <th>Cantidad Disponible</th>
+                        <th>Existencia</th>
+                        <th>Provedor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for usuario in usuarios %}
+                    <tr>
+                        <td>{{ usuario.ID }}</td>
+                        <td>{{ usuario.lote  }}</td>
+                        <td>{{ usuario.nombre }}</td>
+                        <td>{{ usuario.descripcion }}</td>
+                        <td>{{ usuario.unidad_de_medida }}</td>
+                        <td>{{ usuario.cantidad_disponible }}</td>
+                        <td>{{ usuario.existencia }}</td>
+                        <td>{{ usuario.proveedor_id }}</td>
+
+                        <td>
+                            <form method="POST" action="{{ url_for('auth.borrar_material', material_id=usuario.ID) }}" onsubmit="return confirm('¿Estás seguro de eliminar este material?');">
+                                
+                                <button type="submit" class="btn btn-danger btn-sm">Borrar</button>
+                            </form>
+                        </td>
+
+
+                        <td>
+                            <form method="POST" action="{{ url_for('auth.editar_producto', producto_id = usuario.ID) }}" onsubmit="return confirm('¿Estás seguro de editar este material?');">
+                                
+                                <button type="submit" class="btn btn-primary">Editar</button>
+                            </form>
+                        </td>
+                        
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </table>
+        </div>
+    </div>
+</div>
+     
+<!-- Mostrar la gráfica de pastel -->
+
+<!-- Mostrar los datos de los usuarios -->
+
+    <!-- Mostrar los datos de los usuarios -->
+   
+{% endblock %}

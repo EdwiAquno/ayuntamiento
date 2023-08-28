@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Editar Área</h1>
+  <form method="POST" action="{{ url_for('auth.editar_area', area_id=area.ID) }}">
+    {{ form.hidden_tag() }}
+
+    <div class="form-group">
+      {{ form.nombre.label(class_='form-label') }}
+      {{ form.nombre(class_='form-control') }}
+    </div>
+
+    <div class="form-group">
+      {{ form.descripcion.label(class_='form-label') }}
+      {{ form.descripcion(class_='form-control') }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+  </form>
+{% endblock %}

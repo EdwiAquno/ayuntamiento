@@ -1,0 +1,209 @@
+
+
+{% extends 'base.html' %}
+
+
+{% block title %}Home{% endblock%}
+{% block header_img %}{% endblock %}
+{% block header_title %}{% endblock %}
+{% block header_sub %} {% endblock %}
+
+
+
+{% block content %} 
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+           
+            <!-- Content Row -->
+            <div class="row">
+
+                <!-- Earnings (Monthly) Card Example -->
+
+
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-left-warning shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    
+                                    
+                                    <a href="{{ url_for('auth.llenar_tabla') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                        ></i>Provedores</a>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <a href="{{ url_for('auth.inventario') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                        ></i>  Inventario</a>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-left-warning shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    
+                                    
+                                    <a href="{{ url_for('auth.Peticiones') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                        ></i>Peticiones</a>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-left-warning shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    
+                                    
+                                    <a href="{{ url_for('auth.aceptacion') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                        ></i>Aceptacion</a>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Content Row -->
+
+            <div class="row">
+
+                <!-- Area Chart -->
+                <div class="col-xl-12 col-lg-7">
+                    <div class="card shadow mb-4">
+                        <!-- Card Header - Dropdown -->
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                            <div class="dropdown no-arrow"></div>
+                        </div>
+                
+                        <div class="container">
+                            <div class="row">
+                                
+                                    <div class="card mb-4">
+                                        <div class="card-body" >
+                                            <h5 class="card-title">Gráfica de pastel</h5>
+                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"></div>
+                                            <img src="data:image/png;base64,{{ image_base64 }}" alt="Gráfica de pastel" class="img-fluid">
+                                        </div>
+                                    </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            <!-- Content Row -->
+            <div class="row">
+
+                <!-- Content Column -->
+                
+                    
+                    <div class="container overflow-hidden text-center">
+                        <div class="row gx-4">
+                          <div class="col">
+                           <div class="p-3">
+                            <div >
+
+                                <!-- Project Card Example -->
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary"></h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                           </div>
+                          </div>
+                          <div class="col">
+                            <div class="p-3"><div class="row">
+                                <div >
+                                    <div class="container">
+                                        <h1>Mensajes en la bandeja de entrada</h1>
+                                        {% for mensaje in mensajes %}
+                                        <div class="card my-3">
+                                            <div class="card-header">
+                                                <h3 class="card-title">{{ mensaje.subject }}</h3>
+                                            </div>
+                                            <div class="card-body">
+                                                {% if "application/pdf" in mensaje.content_type %}
+                                                <a href="#" class="btn btn-primary" onclick="verPDF('{{ mensaje.id }}'); return false;">Ver PDF</a>
+                                                <div id="pdfTextContainer{{ mensaje.id }}"></div>
+                                                {% else %}
+                                                <p>De: {{ mensaje.from }}</p>
+                                                <p>Para: {{ mensaje.to }}</p>
+                                                <p>Fecha: {{ mensaje.date }}</p>
+                                                <p>{{ mensaje.body }}</p>
+                                                {% if "url_adjunto" in mensaje %}
+                                                <p>Adjunto: <a href="{{ mensaje.url_adjunto }}" target="_blank">Ver Adjunto</a></p>
+                                                {% endif %}
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+        
+                        </div></div>
+                          </div>
+                        </div>
+                      </div>
+
+                    <!-- Color System -->
+                    
+
+                <div class="col-lg-6 mb-4">
+
+                    <!-- Illustrations -->
+                   
+                    
+
+                    <!-- Approach -->
+                   
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+    
+
+{% endblock %}    

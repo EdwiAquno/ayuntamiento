@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h2>Exitosa</h2>
+      <form id="solicitudForm" method="post" action="{{ url_for('auth.aceptacion') }}" class="form-horizontal">
+        {{ form.hidden_tag() }}
+        {{ form.csrf_token }}
+        <div class="form-group">
+          {{ form.descripcion.label(class="control-label col-md-2") }}
+          <div class="col-md-10">
+            {{ form.descripcion(class="form-control", rows=4, value=descripcion) }}
+          </div>
+        </div>
+        <div class="form-group">
+          {{ form.numero_peticion.label(class="control-label col-md-2") }}
+          <div class="col-md-10">
+            {{ form.numero_peticion(class="form-control", value=numero_peticion) }}
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Agregar otro producto</button>
+      </form>
+      <iframe src="{{ pdf_content }}" width="100%" height="600px"></iframe>
+  
+    </div>
+  </div>
+</div>
+<script>
+  // Código JavaScript para la ventana emergente
+  var agregarProducto = confirm("¿Deseas agregar otro producto?");
+if (agregarProducto) {
+  window.location.href = "{{ url_for('auth.aceptacion') }}";
+} else {
+  // Realizar la consulta a la base de datos para generar el PDF y enviar por correo electrónico
+  // Aquí debes llamar a la función para generar el PDF y enviar el correo electrónico
+  // Ejemplo:
+   // Llama a la función para generar el PDF y enviar el correo electrónico
+
+  // Mostrar mensaje de éxito
+  alert("¡Solicitud exitosa! Se generó el PDF y se envió por correo electrónico.");
+  
+  // Redireccionar a la página de inicio (o a cualquier otra página)
+  window.location.href = "{{ url_for('auth.aceptacion_exitosa_exitosa') }}";
+}
+
+</script>
+{% endblock %}

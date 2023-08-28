@@ -1,0 +1,18 @@
+<script>
+    // Función para redirigir y mostrar el mensaje después de un retraso de 3 segundos
+    function redirigirYPresentarMensaje() {
+      // Mostrar mensaje en ventana emergente después de 3 segundos
+      setTimeout(function() {
+        alert("La petición ya ha sido agregada anteriormente.");
+      }, 1000); // Retraso de 3 segundos (3000 milisegundos)
+  
+      // Redirigir a la página de Peticiones después de 3.5 segundos
+      setTimeout(function() {
+        window.location.href = "{{ url_for('auth.Peticiones') }}";
+      }, 3500); // Retraso de 3.5 segundos (3500 milisegundos)
+    }
+  
+    // Llamar a la función para iniciar el proceso automáticamente
+    redirigirYPresentarMensaje();
+  </script>
+  

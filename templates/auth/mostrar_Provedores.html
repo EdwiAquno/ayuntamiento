@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+
+<div class="container">
+    <div class="card shadow mb-4"> 
+
+      
+        <div class="card-body">
+            <div class="table-responsive">
+              <form method="POST" action="{{ url_for('auth.mostrar_Provedoresbuscar') }}"
+class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+<div class="input-group">
+    <input type="text" name="search_term" class="form-control bg-light border-0 small" placeholder="Search for..."
+        aria-label="Search" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+        <button class="btn btn-primary" type="submit">
+            <i class="fas fa-search fa-sm"></i>
+        </button>
+    </div>
+</div>
+</form>
+        <h1>Provedores</h1>
+    
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Dirección</th>
+              <th>Ciudad</th>
+              <th>Teléfono</th>
+              <th>Correo Electrónico</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for proveedor in proveedores %}
+              <tr>
+                <td>{{ proveedor.nombre }}</td>
+                <td>{{ proveedor.direccion }}</td>
+                <td>{{ proveedor.ciudad }}</td>
+                <td>{{ proveedor.telefono }}</td>
+                <td>{{ proveedor.correo_electronico }}</td>
+
+
+                <td>
+                  
+                 
+                 
+                  <form method="POST" action="{{ url_for('auth.borrar_proveedor', proveedor_id=proveedor.ID) }}" onsubmit="return confirm('¿Estás seguro de eliminar este proveedor?');">
+                    <button type="submit" class="btn btn-danger">Borrar</button>
+                  </form>
+                </td>
+
+                <td>
+                  <form method="POST" action="{{ url_for('auth.editar_proveedor', proveedor_id=proveedor.ID) }}"  onsubmit="return confirm('¿Estás seguro de editar este material?');">
+                    <button type="submit" class="btn btn-primary">Editar</button>
+                    </form>
+                </td>
+
+
+
+
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+
+ 
+ 
+{% endblock %}
+

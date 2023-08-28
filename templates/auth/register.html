@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+
+    <div class="text-center">
+        <h1 class="h4 text-gray-900 mb-4">Agregar</h1>
+    </div>
+    <form class="user" method="POST">
+        {{ form.hidden_tag() }}
+    
+        <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                {{ form.username.label(class="form-control-label") }}
+                {{ form.username(class="form-control form-control-user", placeholder="Username") }}
+                {% for error in form.username.errors %}
+                    <span class="text-danger">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                {{ form.nombre.label(class="form-control-label") }}
+                {{ form.nombre(class="form-control form-control-user", placeholder="Nombre") }}
+                {% for error in form.nombre.errors %}
+                    <span class="text-danger">{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+    
+        <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                {{ form.apellido_paterno.label(class="form-control-label") }}
+                {{ form.apellido_paterno(class="form-control form-control-user", placeholder="Apellido Paterno") }}
+                {% for error in form.apellido_paterno.errors %}
+                    <span class="text-danger">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                {{ form.apellido_materno.label(class="form-control-label") }}
+                {{ form.apellido_materno(class="form-control form-control-user", placeholder="Apellido Materno") }}
+                {% for error in form.apellido_materno.errors %}
+                    <span class="text-danger">{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+    
+        <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                {{ form.password.label(class="form-control-label") }}
+                {{ form.password(class="form-control form-control-user", placeholder="Password") }}
+                {% for error in form.password.errors %}
+                    <span class="text-danger">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                {{ form.confirm_password.label(class="form-control-label") }}
+                {{ form.confirm_password(class="form-control form-control-user", placeholder="Confirm Password") }}
+                {% for error in form.confirm_password.errors %}
+                    <span class="text-danger">{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+    
+        <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                {{ form.gender.label }}
+                {{ form.gender(class="form-control") }}
+                {% if form.gender.errors %}
+                    {% for error in form.gender.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                {{ form.area.label }}
+                {{ form.area(class="form-control") }}
+                {% if form.area.errors %}
+                    {% for error in form.area.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    
+        <div class="form-group">
+            {{ form.email.label(class="form-control-label") }}
+            {{ form.email(class="form-control form-control-user", placeholder="Correo Electrónico") }}
+            {% for error in form.email.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    
+        <button type="submit" class="btn btn-primary btn-user btn-block">{{ form.submit.label }}</button>
+        <hr>
+    </form>
+    
+    
+
+</div>
+   
+       
+                    
+                    
+                           
+                            
+                            
+                            
+                     
+                
+
+   
+    {% endblock %}

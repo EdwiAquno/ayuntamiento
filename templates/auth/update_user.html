@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Actualizar Usuario</h1>
+  <form class="user" method="post">
+    {{ form.hidden_tag() }}
+    <div class="form-group row">
+        <div class="col-sm-6 mb-3 mb-sm-0">
+            {{ form.username.label(class="form-control-label") }}
+            {{ form.username(class="form-control form-control-user", placeholder="Nombre de usuario") }}
+            {% for error in form.username.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="col-sm-6">
+            {{ form.nombre.label(class="form-control-label") }}
+            {{ form.nombre(class="form-control form-control-user", placeholder="Nombre") }}
+            {% for error in form.nombre.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-6 mb-3 mb-sm-0">
+            {{ form.apellido_paterno.label(class="form-control-label") }}
+            {{ form.apellido_paterno(class="form-control form-control-user", placeholder="Apellido Paterno") }}
+            {% for error in form.apellido_paterno.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div class="col-sm-6">
+            {{ form.apellido_materno.label(class="form-control-label") }}
+            {{ form.apellido_materno(class="form-control form-control-user", placeholder="Apellido Materno") }}
+            {% for error in form.apellido_materno.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form.password.label(class="form-control-label") }}
+        {{ form.password(class="form-control form-control-user", placeholder="Contraseña") }}
+        {% for error in form.password.errors %}
+            <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.confirm_password.label(class="form-control-label") }}
+        {{ form.confirm_password(class="form-control form-control-user", placeholder="Confirmar Contraseña") }}
+        {% for error in form.confirm_password.errors %}
+            <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        {{ form.gender.label }}
+        {{ form.gender(class="form-control") }}
+        {% if form.gender.errors %}
+            {% for error in form.gender.errors %}
+                <p class="text-danger">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="form-group">
+        {{ form.area.label }}
+        {{ form.area(class="form-control") }}
+        {% if form.area.errors %}
+            {% for error in form.area.errors %}
+                <p class="text-danger">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <button type="submit" class="btn btn-primary btn-user btn-block">{{ form.submit.label }}</button>
+{% endblock %}

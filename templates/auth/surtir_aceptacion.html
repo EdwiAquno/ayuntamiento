@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h1>Surtir Aceptación</h1>
+  <h2>Solicitud ID: {{ solicitud.ID }}</h2>
+  <h3>Material Requerido: {{ solicitud.material }}</h3>
+  <h3>Cantidad de Material Requerido: {{ solicitud.cantidad_material }}</h3>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class="flashes">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+  <form method="POST" action="{{ url_for('auth.surtir_aceptacion', solicitud_id=solicitud.ID) }}">
+    <div class="form-group">
+      <label for="material">Material:</label>
+      <select name="material" id="material" class="form-control">
+        {% for material in materiales %}
+          <option value="{{ material.ID }}">{{ material.nombre }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="cantidad">Cantidad:</label>
+      <input type="number" name="cantidad" id="cantidad" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Surtir</button>
+  </form>
+</div>
+{% endblock %}
